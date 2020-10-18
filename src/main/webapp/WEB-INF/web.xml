@@ -5,11 +5,11 @@
         <servlet-class>com.antoinelamoureux.mavenproject1.controllers.EntranceServlet</servlet-class>
         <init-param>
             <param-name>user</param-name>
-            <param-value>admin</param-value>
+            <param-value>root</param-value>
         </init-param>
         <init-param>
             <param-name>pass</param-name>
-            <param-value>admin</param-value>
+            <param-value>root</param-value>
         </init-param>
         <init-param>
             <param-name>url</param-name>
@@ -25,13 +25,29 @@
         <url-pattern>/go</url-pattern>
     </servlet-mapping>
     <servlet>
-	<servlet-name>ThemesController</servlet-name>
-	<servlet-class>com.antoinelamoureux.mavenproject1.controllers.ThemesController</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>ThemesController</servlet-name>
-	<url-pattern>/themes</url-pattern>
-</servlet-mapping>
+        <servlet-name>NewsController</servlet-name>
+        <servlet-class>com.antoinelamoureux.mavenproject1.controllers.NewsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewsController</servlet-name>
+        <url-pattern>/news</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ThemesController</servlet-name>
+        <servlet-class>com.antoinelamoureux.mavenproject1.controllers.ThemesController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ThemesController</servlet-name>
+        <url-pattern>/themes</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>TagsController</servlet-name>
+        <servlet-class>com.antoinelamoureux.mavenproject1.controllers.TagsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TagsController</servlet-name>
+        <url-pattern>/tags</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

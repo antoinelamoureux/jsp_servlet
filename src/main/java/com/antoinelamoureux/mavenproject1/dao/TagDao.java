@@ -5,7 +5,7 @@
  */
 package com.antoinelamoureux.mavenproject1.dao;
 
-import com.antoinelamoureux.mavenproject1.beans.Theme;
+import com.antoinelamoureux.mavenproject1.beans.Tag;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,19 +17,19 @@ import java.util.List;
  *
  * @author admin
  */
-public class ThemeDao implements Dao<Theme> {
+public class TagDao implements Dao<Tag> {
     private final Connection cnx;
-
-    public ThemeDao(Connection con) {
+    
+    public TagDao(Connection con) {
         cnx = con;
     }
-    
+
     @Override
-    public List<Theme> liste() {
+    public List<Tag> liste() {
         
-        List<Theme> listeThemes = new ArrayList();
+        List<Tag> listeTags = new ArrayList();
         
-        String sql = "SELECT * FROM themes";
+        String sql = "SELECT * FROM tags";
         
         // Avec les 'try-with-ressources'
         // Les classes qui implantent l'interface autoCloseable sont acceptées comme ressources
@@ -38,22 +38,22 @@ public class ThemeDao implements Dao<Theme> {
 	){
 	
 	while(rs.next()) {
-		Theme obj = new Theme();
-                obj.setIdTheme(rs.getLong("id_theme")); // nom de la colonne
+		Tag obj = new Tag();
+                obj.setIdTag(rs.getLong("id_tag")); // nom de la colonne
                 obj.setLibelle(rs.getString("libelle"));				
-		listeThemes.add(obj);		
+		listeTags.add(obj);		
 	}
 	
         } catch (SQLException e) {
         System.out.println(e.getMessage());
         }
         
-        return listeThemes;
+        return listeTags;
     }
 
     @Override
-    public boolean insert(Theme obj) {
-        String sql = "INSERT INTO themes (libelle) VALUES (?)";
+    public boolean insert(Tag obj) {
+        String sql = "INSERT INTO tags (libelle) VALUES (?)";
         
         try(PreparedStatement ps = cnx.prepareStatement(sql);){
 
@@ -71,12 +71,12 @@ public class ThemeDao implements Dao<Theme> {
     }
 
     @Override
-    public Theme find(Long id) {
-        Theme obj = new Theme();
+    public Tag find(Long id) {
+        Tag obj = new Tag();
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String sql = "SELECT * FROM themes WHERE id_theme=?";
+        String sql = "SELECT * FROM tags WHERE id_theme=?";
         
         try {
             if (rs != null && ps != null) {
@@ -90,13 +90,13 @@ public class ThemeDao implements Dao<Theme> {
     }
 
     @Override
-    public boolean update(Theme obj) {
-        String sql = "SELECT * FROM themes WHERE id_theme=?";
+    public boolean update(Tag obj) {
+        String sql = "SELECT * FROM tags WHERE id_theme=?";
         
         try(PreparedStatement ps = cnx.prepareStatement(sql);){
 
 	ps.setString(1, obj.getLibelle());
-        ps.setLong(2, obj.getIdTheme());
+        ps.setLong(2, obj.getIdTag());
         
         int i = ps.executeUpdate();
         if (i >= 1) {
@@ -111,7 +111,7 @@ public class ThemeDao implements Dao<Theme> {
 
     @Override
     public void delete(Long id) {
-        String sql = "DELETE FROM themes WHERE id_theme=?";
+        String sql = "DELETE FROM themes WHERE id_tag=?";
         
         try(PreparedStatement ps = cnx.prepareStatement(sql);){
 
@@ -128,4 +128,5 @@ public class ThemeDao implements Dao<Theme> {
     public long count() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

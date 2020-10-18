@@ -8,5 +8,5 @@
 <!DOCTYPE html>
 <html>
     <header>
-        <div><h1>Partie TOP</h1></div>
+        <div><h1>News System</h1></div>
 </header>

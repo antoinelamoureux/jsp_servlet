@@ -5,8 +5,8 @@
  */
 package com.antoinelamoureux.mavenproject1.controllers;
 
-import com.antoinelamoureux.mavenproject1.beans.Theme;
-import com.antoinelamoureux.mavenproject1.dao.ThemeDao;
+import com.antoinelamoureux.mavenproject1.beans.Tag;
+import com.antoinelamoureux.mavenproject1.dao.TagDao;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -21,31 +21,22 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author admin
  */
-@WebServlet(name = "ThemesController", urlPatterns = {"/themes"})
-public class ThemesController extends HttpServlet {
+@WebServlet(name = "TagsController", urlPatterns = {"/tags"})
+public class TagsController extends HttpServlet {
     private Connection cnx;
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.println("ThemesController::DOGET");
+       System.out.println("ThemesController::DOGET");
         
         // Une connexion JDBC 
         cnx = (Connection)getServletContext().getAttribute("connexion");
         
         // Un objet ThemeDao
-        ThemeDao dao = new ThemeDao(cnx);
+        TagDao dao = new TagDao(cnx);
         System.out.println("*******CONNECTION*********" + cnx);
-        Theme theme = new Theme();
+        Tag tag = new Tag();
         Long id = -1L;
         
         String action = "0";
@@ -60,68 +51,49 @@ public class ThemesController extends HttpServlet {
         switch(action){
             // Listing
             case "0":
-                List<Theme> listeThemes = new ArrayList();
-                listeThemes = dao.liste();
+                List<Tag> listeTags = new ArrayList();
+                listeTags = dao.liste();
        
                 // On crée un attribut de requète 
-                request.setAttribute("listeThemes", listeThemes);
-                view = "themes/liste.jsp";
+                request.setAttribute("listeTags", listeTags);
+                view = "tags/liste.jsp";
             break;
             //Création
             case "1":
-                view = "themes/create.jsp";
+                view = "tags/create.jsp";
             break;
             // Modification
             case "2":
                 if (request.getParameter("id") != null) id = Long.parseLong(request.getParameter("id"));
-                theme = dao.find(id);
-                request.setAttribute("theme", theme);
-                view = "themes/modify.jsp";
+                tag = dao.find(id);
+                request.setAttribute("tag", tag);
+                view = "tags/modify.jsp";
             break;
             // Suppression
             case "3":
                 if (request.getParameter("id") != null) id = Long.parseLong(request.getParameter("id"));
-                theme = dao.find(id);
-                request.setAttribute("theme", theme);
-                view = "themes/delete.jsp";
-            break;  
-            // Duplication
-              case "4":
-                // Vers le formulaire comme pour modify. 
-                 /*
-                if (request.getParameter("id") != null) id = Long.parseLong(request.getParameter("id"));
-                theme = dao.find(id);
-                request.setAttribute("theme", theme);
-                view = "themes/delete.jsp";
-                */
+                tag = dao.find(id);
+                request.setAttribute("tag", tag);
+                view = "tags/delete.jsp";
             break;  
         }
         
         // On forward la requète
-        request.getRequestDispatcher(view).forward(request, response);       
+        request.getRequestDispatcher(view).forward(request, response);  
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.println("ThemesController::DOPOST");
+       System.out.println("ThemesController::DOPOST");
         
          // Une connexion JDBC 
         cnx = (Connection)getServletContext().getAttribute("connexion");
         
         // Un objet ThemeDao
-        ThemeDao dao = new ThemeDao(cnx);
-        Theme theme = new Theme();
-        List<Theme> listeThemes = new ArrayList();
+        TagDao dao = new TagDao(cnx);
+        Tag tag = new Tag();
+        List<Tag> listeTags = new ArrayList();
         String action = "";
         
         // Présence d'un paramètre 'action' ?
@@ -134,68 +106,68 @@ public class ThemesController extends HttpServlet {
         switch(action){
             
             case "0":
-                listeThemes = dao.liste();
+                listeTags = dao.liste();
  
                 // On crée un attribut de requète 
-                request.setAttribute("listeThemes", listeThemes);
-                view = "themes/liste.jsp";
+                request.setAttribute("listeTags", listeTags);
+                view = "tags/liste.jsp";
             break;
             
             case "1":
                 // On récupère les données du formulaire
                 if (request.getParameter("libelle") != null) {
-                    theme.setLibelle(request.getParameter("libelle"));
+                    tag.setLibelle(request.getParameter("libelle"));
                 }
-                    System.out.println("libelle" + theme.getLibelle());
+                    System.out.println("libelle" + tag.getLibelle());
                     
                 // On insère en BD
-                dao.insert(theme);
+                dao.insert(tag);
                 
                 // On rafraichit la liste
-                listeThemes = dao.liste();
-                request.setAttribute("listeThemes", listeThemes);
+                listeTags = dao.liste();
+                request.setAttribute("listeTags", listeTags);
                 
                 // On forward
-                view = "themes/liste.jsp";
+                view = "tags/liste.jsp";
             break;
             
             case "2":
-                if (request.getParameter("id") != null) theme.setIdTheme(Long.parseLong(request.getParameter("id")));
-                if (request.getParameter("libbelle") != null) theme.setLibelle(request.getParameter("libelle"));
-                System.out.println("libelle" + theme.getLibelle());
-                dao.update(theme);
-                listeThemes = dao.liste();
-                request.setAttribute("listeThemes", listeThemes);
-                view = "themes/liste.jsp";
+                if (request.getParameter("id") != null) tag.setIdTag(Long.parseLong(request.getParameter("id")));
+                if (request.getParameter("libbelle") != null) tag.setLibelle(request.getParameter("libelle"));
+                System.out.println("libelle" + tag.getLibelle());
+                dao.update(tag);
+                listeTags = dao.liste();
+                request.setAttribute("listeTags", listeTags);
+                view = "tags/liste.jsp";
             break;
             
             case "3":
                 if (request.getParameter("id") != null) dao.delete(Long.parseLong(request.getParameter("id")));
             
-                System.out.println("libelle" + theme.getLibelle());
+                System.out.println("libelle" + tag.getLibelle());
    
-                listeThemes = dao.liste();
-                request.setAttribute("listeThemes", listeThemes);
-                view = "themes/liste.jsp";
+                listeTags = dao.liste();
+                request.setAttribute("listeTags", listeTags);
+                view = "tags/liste.jsp";
             break;
             
             case "4":
                 // On crée un object Theme
                 // On récupère les données du formulaire
                 if (request.getParameter("libelle") != null) {
-                    theme.setLibelle(request.getParameter("libelle"));
+                    tag.setLibelle(request.getParameter("libelle"));
                 }
-                    System.out.println("libelle" + theme.getLibelle());
+                    System.out.println("libelle" + tag.getLibelle());
                     
                 // On insère en BD
-                dao.insert(theme);
+                dao.insert(tag);
                 
                 // On rafraichit la liste
-                listeThemes = dao.liste();
-                request.setAttribute("listeThemes", listeThemes);
+                listeTags = dao.liste();
+                request.setAttribute("listeTags", listeTags);
                 
                 // On forward
-                view = "themes/liste.jsp";
+                view = "tags/liste.jsp";
             break;
         }
         
@@ -203,7 +175,7 @@ public class ThemesController extends HttpServlet {
         request.getRequestDispatcher(view).forward(request, response); 
 
         
-        System.out.println(listeThemes);
+        System.out.println(listeTags);
     }
 
     /**
@@ -217,10 +189,3 @@ public class ThemesController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-// Valuers pour les actions
-// 0 ==> liste
-// 1 ==> création
-// 2 ==> modification
-// 3 ==> supression
-

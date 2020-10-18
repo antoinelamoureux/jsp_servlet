@@ -18,13 +18,8 @@
         <jsp:include page="../haut.jsp"/>
         <jsp:include page="../navigation.jsp"/>   
         
-        <h1>Pas de java dans les pages JSP, on utilise utilise EL et JSTL</h1>
-        <p>${2*2}</p>
         <p><a href="themes?action=1">Nouveau Theme</a></p>
         <table>
-            <tr>
-                <th>Libellé</th>
-            </tr>
             <c:forEach var="theme" items="${requestScope.listeThemes}">
             <tr>
                 <td>${theme.libelle}</td>

@@ -1,6 +1,12 @@
 com/antoinelamoureux/mavenproject1/controllers/EntranceServlet.class
 com/antoinelamoureux/mavenproject1/beans/Theme.class
+com/antoinelamoureux/mavenproject1/dao/NewsDao.class
+com/antoinelamoureux/mavenproject1/beans/News.class
 com/antoinelamoureux/mavenproject1/dao/ThemeDao.class
+com/antoinelamoureux/mavenproject1/beans/Tag.class
+com/antoinelamoureux/mavenproject1/controllers/NewsController.class
+com/antoinelamoureux/mavenproject1/dao/TagDao.class
+com/antoinelamoureux/mavenproject1/controllers/TagsController.class
 com/antoinelamoureux/mavenproject1/controllers/ThemesController.class
 com/antoinelamoureux/mavenproject1/resources/JavaEE8Resource.class
 com/antoinelamoureux/mavenproject1/dao/Dao.class

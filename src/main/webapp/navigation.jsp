@@ -8,6 +8,8 @@
 <html>
     <header>
         <nav>
-            <p><a href="/themes">Thèmes</a></p>
+            <span><a href="${pageContext.request.contextPath}/news">News</span> |
+            <span><a href="${pageContext.request.contextPath}/themes">Thèmes</a></span> |
+            <span><a href="${pageContext.request.contextPath}/tags">Tags</a></span>
         </nav>
 </header>

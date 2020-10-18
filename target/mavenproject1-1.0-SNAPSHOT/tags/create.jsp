@@ -19,10 +19,10 @@
         <jsp:include page="../navigation.jsp"/>   
         
         <div id=""main">
-            <form action="themes" method="post">
+            <form action="tags" method="post">
                 <input type="hidden" name="action" value="${requestScope.action}"/>
                 <p><input type="text" name="libelle" /></p>
-                <p><input type="button" value="OK !" /></p>
+                <p><input type="text" name="OK !" /></p>
             </form>
         </div>
     </body>

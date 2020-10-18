@@ -18,13 +18,16 @@
         <jsp:include page="../haut.jsp"/>
         <jsp:include page="../navigation.jsp"/>   
         
-        <p><a href="themes?action=1">Nouveau Theme</a></p>
+        <p><a href="tags?action=1">Nouveau Tag</a></p>
         <table>
-            <c:forEach var="theme" items="${requestScope.listeThemes}">
             <tr>
-                <td>${theme.libelle}</td>
-                    <td><a href="themes?id=${theme.idTheme}&action=2">Modifier</<td>
-                    <td><a href="themes?id=${theme.idTheme}$action=3">Supprimer</a></<td>
+                <th>Libellé</th>
+            </tr>
+            <c:forEach var="tag" items="${requestScope.listeTags}">
+            <tr>
+                <td>${tag.libelle}</td>
+                    <td><a href="tags?id=${tag.idTag}&action=2">Modifier</<td>
+                    <td><a href="tags?id=${tag.idTag}$action=3">Supprimer</a></<td>
             </tr>
             </c:forEach>
         </table>
